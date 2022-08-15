@@ -1416,6 +1416,7 @@ function Write-VhdOutput {
             OriginalSizeGB   = [math]::Round( $OriginalSize / 1GB, 2 )
             FinalSizeGB      = [math]::Round( $FinalSize / 1GB, 2 )
             SpaceSavedGB     = [math]::Round( ($OriginalSize - $FinalSize) / 1GB, 2 )
+            MaxSizeDiskGB    = [math]::Round( $partitionsize.SizeMax / 1GB, 2 )
             FullName         = $FullName
         }
 
@@ -1426,7 +1427,7 @@ function Write-VhdOutput {
         $retries = 0
         while ($retries -lt 10 -and $success -ne $true) {
             try {
-                $output | Export-Csv -Path $Path -NoClobber -Append -ErrorAction Stop -NoTypeInformation
+                $output | Export-Csv -Path $Path -NoClobber -Append -ErrorAction Stop -NoTypeInformation -Delimiter ";"
                 $success = $true
             }
             catch {
@@ -2127,6 +2128,7 @@ function Write-VhdOutput {
             OriginalSizeGB   = [math]::Round( $OriginalSize / 1GB, 2 )
             FinalSizeGB      = [math]::Round( $FinalSize / 1GB, 2 )
             SpaceSavedGB     = [math]::Round( ($OriginalSize - $FinalSize) / 1GB, 2 )
+            MaxSizeDiskGB    = [math]::Round( $partitionsize.SizeMax / 1GB, 2 )
             FullName         = $FullName
         }
 
